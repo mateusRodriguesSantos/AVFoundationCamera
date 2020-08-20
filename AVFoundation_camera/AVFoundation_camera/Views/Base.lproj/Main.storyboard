@@ -15,13 +15,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Lo-fW-VVO">
-                                <rect key="frame" x="173" y="811" width="69" height="30"/>
-                                <state key="normal" title="Get Photo"/>
-                                <connections>
-                                    <action selector="getPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3za-1l-qK1"/>
-                                </connections>
-                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="azl-HW-gGh">
                                 <rect key="frame" x="142" y="75" width="131" height="32"/>
                                 <segments>
@@ -32,15 +25,30 @@
                                     <action selector="Triggerbuttonsegmentocontrol:" destination="BYZ-38-t0r" eventType="valueChanged" id="tgK-kU-0EM"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Lo-fW-VVO">
+                                <rect key="frame" x="137" y="743.5" width="140" height="118"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="TXg-xP-sQU"/>
+                                    <constraint firstAttribute="height" constant="119" id="hwQ-PK-4bP"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="camera.circle.fill" catalog="system">
+                                    <color key="titleColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.97254901959999995" green="0.71372549019999998" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                </state>
+                                <connections>
+                                    <action selector="getPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3za-1l-qK1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Lo-fW-VVO" secondAttribute="trailing" constant="172" id="92c-Jn-7Kf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="azl-HW-gGh" secondAttribute="trailing" constant="141" id="DYn-VX-LwU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Lo-fW-VVO" secondAttribute="trailing" constant="137" id="Ddd-je-9fp"/>
                             <constraint firstItem="azl-HW-gGh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="142" id="Ppm-sP-jJR"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7Lo-fW-VVO" secondAttribute="bottom" constant="21" id="sds-hE-0xf"/>
+                            <constraint firstItem="7Lo-fW-VVO" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="abi-9x-9On"/>
+                            <constraint firstItem="7Lo-fW-VVO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="137" id="fuD-qb-1ny"/>
                             <constraint firstItem="azl-HW-gGh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="31" id="vKV-e3-I5B"/>
-                            <constraint firstItem="7Lo-fW-VVO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="173" id="zRy-EN-thh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -54,4 +62,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera.circle.fill" catalog="system" width="128" height="121"/>
+    </resources>
 </document>
