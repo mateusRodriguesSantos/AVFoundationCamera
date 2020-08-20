@@ -14,9 +14,11 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     var positionDevice:AVCaptureDevice.Position = AVCaptureDevice.Position.front
     @IBOutlet weak var segmentoBackOrFront: UISegmentedControl!
     
-    //Selecting the capture session this is responsable for all gerency of the input and output devices and media captures
+    @IBOutlet weak var viewCamera: UIView!
+    
+    ///Selecting the capture session this is responsable for all gerency of the input and output devices and media captures
     let captureSession = AVCaptureSession()
-//    let previewView = PreviewView(frame: CGRect(x: 20, y: 179, width: 374, height: 512))
+    //let previewView = PreviewView(frame: CGRect(x: 20, y: 179, width: 374, height: 512))
     
     ///Layer of camera view
     var previewLayer:CALayer!
@@ -88,9 +90,12 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         //Configuring the layer that show video in real time
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.videoGravity = .resizeAspectFill
+        previewLayer.frame = self.view.layer.bounds
         self.previewLayer = previewLayer
         self.view.layer.addSublayer(self.previewLayer)
-        self.previewLayer.frame = self.view.layer.frame
+
+        
         captureSession.startRunning()
         
         //Configuring the output
@@ -120,7 +125,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             
             takePhoto = false
             //getImageFromSampleBuffer
-            
             if let image = getImageFromSampleBuffer(buffer: sampleBuffer){
                 
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
@@ -134,7 +138,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
          
         }
     }
-    
+    //Alert saved image on photo library
     func alertSaved(){
         let alert = UIAlertAction(title: "OK", style: .default) { (UIAlertAction) in
             
@@ -146,6 +150,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.present(alertController, animated: false, completion: nil)
     }
     
+    //Gets image
     func getImageFromSampleBuffer(buffer:CMSampleBuffer) -> UIImage?{
         
         if let pixelBuffer = CMSampleBufferGetImageBuffer(buffer){
