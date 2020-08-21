@@ -40,20 +40,30 @@
                                     <action selector="getPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3za-1l-qK1"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GO0-AN-UtO">
+                                <rect key="frame" x="142" y="410" width="131" height="47"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="39"/>
+                                <color key="textColor" red="1" green="0.074743433489999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="GO0-AN-UtO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="142" id="0Ju-dY-scJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GO0-AN-UtO" secondAttribute="trailing" constant="141" id="4GG-Uc-omq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="azl-HW-gGh" secondAttribute="trailing" constant="141" id="DYn-VX-LwU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Lo-fW-VVO" secondAttribute="trailing" constant="137" id="Ddd-je-9fp"/>
                             <constraint firstItem="azl-HW-gGh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="142" id="Ppm-sP-jJR"/>
                             <constraint firstItem="7Lo-fW-VVO" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="abi-9x-9On"/>
                             <constraint firstItem="7Lo-fW-VVO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="137" id="fuD-qb-1ny"/>
+                            <constraint firstItem="GO0-AN-UtO" firstAttribute="top" secondItem="azl-HW-gGh" secondAttribute="bottom" constant="304" id="uHu-CM-sZg"/>
                             <constraint firstItem="azl-HW-gGh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="31" id="vKV-e3-I5B"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="buttonGetPhoto" destination="7Lo-fW-VVO" id="VvG-4v-KGW"/>
+                        <outlet property="resultLabel" destination="GO0-AN-UtO" id="TUC-dw-xWn"/>
                         <outlet property="segmentoBackOrFront" destination="azl-HW-gGh" id="GOV-7s-WWI"/>
                     </connections>
                 </viewController>

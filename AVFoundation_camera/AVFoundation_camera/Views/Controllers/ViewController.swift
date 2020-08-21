@@ -8,6 +8,8 @@
 
 import UIKit
 import AVFoundation
+import CoreML
+import Vision
 
 class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
@@ -29,8 +31,16 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     ///The responsable boolean that defines if I can get photo
     var takePhoto = false
     
+    ///Result Label
+    @IBOutlet weak var resultLabel: UILabel!
+    
     ///UIButton getPhoto
     @IBOutlet weak var buttonGetPhoto: UIButton!
+    
+    ///Resquest for analysis
+    
+    //Instance of the model
+    let visionModel = faceShape_1()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +69,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     //Trigger of the button get photo
     @IBAction func getPhoto(_ sender: Any) {
+        resultLabel.isHidden = true
         takePhoto = true
         
     }
@@ -128,6 +139,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             //getImageFromSampleBuffer
             if let image = getImageFromSampleBuffer(buffer: sampleBuffer){
                 
+                classifiedFaceShape(imagem: image)
+                
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
              
                 DispatchQueue.main.async {
@@ -144,7 +157,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         let alert = UIAlertAction(title: "OK", style: .default) { (UIAlertAction) in
             
         }
-        
         let alertController = UIAlertController(title: "Photo Library", message: "Photo saved at your photo library", preferredStyle: .alert)
         alertController.addAction(alert)
         
@@ -180,4 +192,65 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
 
 }
+
+extension ViewController{
+
+    func classifiedFaceShape(imagem:UIImage?) {
+         UIGraphicsBeginImageContextWithOptions (CGSize(width: 299, height: 299), true, 2.0)
+                
+                imagem!.draw(in: CGRect(x: 0, y: 0, width: 299, height: 299))
+                
+                let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+                UIGraphicsEndImageContext()
+                
+                let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
+                var pixelBuffer : CVPixelBuffer?
+                let status = CVPixelBufferCreate(kCFAllocatorDefault,
+                                                 Int(newImage.size.width), Int(newImage.size.height),
+                                                 kCVPixelFormatType_32ARGB, attrs, &pixelBuffer)
+               
+                guard (status == kCVReturnSuccess) else {
+                    return
+                }
+                
+                CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
+                
+                let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer!)
+                
+                let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
+                
+                let context = CGContext(data: pixelData, width: Int(newImage.size.width), height: Int(newImage.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!), space: rgbColorSpace,bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
+                
+                context?.translateBy(x: 0, y: newImage.size.height)
+                
+                context?.scaleBy(x: 1.0, y: -1.0)
+                
+                UIGraphicsPushContext(context!)
+                
+                newImage.draw(in: CGRect(x: 0, y: 0, width: newImage.size.width, height: newImage.size.height))
+                
+                UIGraphicsPopContext()
+                
+                CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
+                
+                
+                // MARK: Prediction da imagem / classificacao
+                //predict image label
+        //        classificacao.isHidden = false
+                guard let prediction = try? visionModel.prediction(image: pixelBuffer!) else {
+                    print("Can't Predict!")
+                    return
+                }
+                
+        //        classificacao.text = "This is probably \(prediction.classLabel)."
+        DispatchQueue.main.async {
+            self.resultLabel.isHidden = false
+            self.resultLabel.text = "\(prediction.classLabel)"
+        }
+                 print("This is probably \(prediction.classLabel).")
+                
+    }
+}
+
+
 

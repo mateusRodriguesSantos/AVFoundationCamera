@@ -15,6 +15,8 @@
 		ADA6B46F24EB038F00E36E34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA6B46D24EB038F00E36E34 /* LaunchScreen.storyboard */; };
 		ADA6B47C24EB04B800E36E34 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA6B47B24EB04B800E36E34 /* Camera.swift */; };
 		ADA6B47E24EB04E300E36E34 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA6B47D24EB04E300E36E34 /* CameraModel.swift */; };
+		ADC3568224F0395600E36CA8 /* faceShape 1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = ADC3568124F0395600E36CA8 /* faceShape 1.mlmodel */; };
+		ADC3568424F0490D00E36CA8 /* pickerpredict.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC3568324F0490D00E36CA8 /* pickerpredict.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		ADA6B47024EB038F00E36E34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADA6B47B24EB04B800E36E34 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		ADA6B47D24EB04E300E36E34 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
+		ADC3568124F0395600E36CA8 /* faceShape 1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "faceShape 1.mlmodel"; sourceTree = "<group>"; };
+		ADC3568324F0490D00E36CA8 /* pickerpredict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pickerpredict.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,7 @@
 				ADA6B47724EB03A200E36E34 /* Views */,
 				ADA6B45F24EB038A00E36E34 /* AppDelegate.swift */,
 				ADA6B46124EB038A00E36E34 /* SceneDelegate.swift */,
+				ADC3568124F0395600E36CA8 /* faceShape 1.mlmodel */,
 				ADA6B46B24EB038F00E36E34 /* Assets.xcassets */,
 				ADA6B47024EB038F00E36E34 /* Info.plist */,
 			);
@@ -101,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				ADA6B47D24EB04E300E36E34 /* CameraModel.swift */,
+				ADC3568324F0490D00E36CA8 /* pickerpredict.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -178,8 +184,10 @@
 			files = (
 				ADA6B47C24EB04B800E36E34 /* Camera.swift in Sources */,
 				ADA6B46424EB038A00E36E34 /* ViewController.swift in Sources */,
+				ADC3568424F0490D00E36CA8 /* pickerpredict.swift in Sources */,
 				ADA6B47E24EB04E300E36E34 /* CameraModel.swift in Sources */,
 				ADA6B46024EB038A00E36E34 /* AppDelegate.swift in Sources */,
+				ADC3568224F0395600E36CA8 /* faceShape 1.mlmodel in Sources */,
 				ADA6B46224EB038A00E36E34 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

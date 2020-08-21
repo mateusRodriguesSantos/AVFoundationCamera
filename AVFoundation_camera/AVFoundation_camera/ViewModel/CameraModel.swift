@@ -9,14 +9,25 @@
 import Foundation
 import UIKit
 import AVFoundation
+import CoreML
+import Vision
 
-class PreviewView: UIView {
-    override class var layerClass: AnyClass {
-        return AVCaptureVideoPreviewLayer.self
+
+
+
+class Recognition{
+    
+    let visionModel:VNCoreMLModel?
+    
+    init() {
+        do {
+            let url = Bundle.main.path(forResource: "faceShape 1", ofType: ".mlmodel")
+            let path = URL(fileURLWithPath: url!)
+            try visionModel = VNCoreMLModel(for: MLModel(contentsOf: path))
+        } catch {
+            fatalError("Error in load vision model")
+        }
     }
     
-    /// Convenience wrapper to get layer as its statically known type.
-    var videoPreviewLayer: AVCaptureVideoPreviewLayer {
-        return layer as! AVCaptureVideoPreviewLayer
-    }
+    
 }
