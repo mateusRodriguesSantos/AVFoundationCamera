@@ -93,7 +93,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         //Configuring input device
         do{
             let captureDeviceInput = try AVCaptureDeviceInput(device: captureDevice)
-            
+            captureDeviceInput
             captureSession.addInput(captureDeviceInput)
         }catch{
             print(error.localizedDescription)
@@ -133,6 +133,29 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     //Function of the capture output
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        
+        
+        //Retrieving EXIF data of camara frame buffer
+        let rawMetadata = CMCopyDictionaryOfAttachments(allocator: nil, target: sampleBuffer, attachmentMode: CMAttachmentMode(kCMAttachmentMode_ShouldPropagate))
+        let metadata = CFDictionaryCreateMutableCopy(nil, 0, rawMetadata) as NSMutableDictionary
+        let exifData = metadata.value(forKey: "{Exif}") as? NSMutableDictionary
+        
+        let FNumber : Double = exifData?["FNumber"] as! Double
+        let ExposureTime : Double = exifData?["ExposureTime"] as! Double
+        let ISOSpeedRatingsArray = exifData!["ISOSpeedRatings"] as? NSArray
+        let ISOSpeedRatings : Double = ISOSpeedRatingsArray![0] as! Double
+        let CalibrationConstant : Double = 50
+        
+        //Calculating the luminosity
+        let luminosity : Double = (CalibrationConstant * FNumber * FNumber ) / ( ExposureTime * ISOSpeedRatings )
+        
+        DispatchQueue.main.async {
+                self.resultLabel.isHidden = false
+                self.resultLabel.text = "\(luminosity)"
+        }
+        
+        print("Valor da luminosidade: \(luminosity)")
+        
         if takePhoto{
             
             takePhoto = false
@@ -244,8 +267,8 @@ extension ViewController{
                 
         //        classificacao.text = "This is probably \(prediction.classLabel)."
         DispatchQueue.main.async {
-            self.resultLabel.isHidden = false
-            self.resultLabel.text = "\(prediction.classLabel)"
+//            self.resultLabel.isHidden = false
+//            self.resultLabel.text = "\(prediction.classLabel)"
         }
                  print("This is probably \(prediction.classLabel).")
                 
